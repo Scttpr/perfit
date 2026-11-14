@@ -33,7 +33,7 @@ jobs:
           CONTACT_PHONE_ROMAIN_RAW: ${{ secrets.CONTACT_PHONE_ROMAIN_RAW }}
           CONTACT_SIRET: ${{ secrets.CONTACT_SIRET }}
           FORM_ENDPOINT: ${{ secrets.FORM_ENDPOINT }}
-        run: ./build.sh
+        run: bash ./build.sh
 
       - name: Upload de l'artefact Pages
         uses: actions/upload-pages-artifact@v3
