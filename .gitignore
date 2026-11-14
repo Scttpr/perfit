@@ -1,0 +1,10 @@
+.env
+.env.local
+assets/js/config.js
+# images produites au build (décodées depuis les .b64 embarqués ou téléchargées via manifest.tsv)
+assets/img/*.jpg
+assets/img/*.jpeg
+assets/img/*.png
+assets/img/*.gif
+.DS_Store
+*.log
