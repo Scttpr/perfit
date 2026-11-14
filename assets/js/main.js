@@ -3,18 +3,27 @@
 
   var cfg = window.PERFIT_CONFIG || {};
 
-  // Fill personal-data placeholders from config.js (generated from env vars at build time)
+  // Fill placeholders from config.js (generated from env vars at build time).
+  // Elements whose value is missing/empty are removed, along with their "Label :" text.
   function fillCfg() {
     document.querySelectorAll("[data-cfg]").forEach(function (el) {
       var key = el.getAttribute("data-cfg");
-      if (cfg[key] !== undefined && cfg[key] !== "") el.textContent = cfg[key];
+      var val = cfg[key];
+      if (val !== undefined && val !== "") {
+        el.textContent = val;
+      } else {
+        var prev = el.previousSibling;
+        if (prev && prev.nodeType === 3 && /:\s*$/.test(prev.textContent)) prev.textContent = "";
+        el.remove();
+      }
     });
     document.querySelectorAll("[data-cfg-href]").forEach(function (el) {
       var tpl = el.getAttribute("data-cfg-href");
       var href = tpl.replace(/\{(\w+)\}/g, function (m, key) {
         return cfg[key] !== undefined ? cfg[key] : m;
       });
-      el.setAttribute("href", href);
+      if (href.indexOf("{") === -1) el.setAttribute("href", href);
+      else el.removeAttribute("href");
     });
   }
 
@@ -58,7 +67,7 @@
     dialog.addEventListener("click", function (e) { if (e.target === dialog) close(); });
   }
 
-  // Contact form: POST to FORM_ENDPOINT (env) if set, otherwise mailto fallback
+  // Contact form: no backend — opens a prefilled mail draft (mailto:)
   function initForm() {
     var form = document.getElementById("contact-form");
     if (!form) return;
@@ -72,27 +81,12 @@
         email: form.email.value.trim(),
         message: form.message.value.trim()
       };
-      var endpoint = cfg.formEndpoint || "";
-      if (status) { status.className = "form-status"; status.textContent = "Envoi en cours…"; }
-      if (!endpoint) {
-        var subject = encodeURIComponent("Demande de contact — " + (cfg.siteName || ""));
-        var body = encodeURIComponent(
-          "Nom : " + data.nom + "\nTéléphone : " + data.telephone + "\nEmail : " + data.email + "\n\n" + data.message
-        );
-        window.location.href = "mailto:" + (cfg.email || "") + "?subject=" + subject + "&body=" + body;
-        return;
-      }
-      fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify(data)
-      }).then(function (res) {
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        if (status) { status.className = "form-status ok"; status.textContent = "Merci ! Votre message a bien été envoyé."; }
-        form.reset();
-      }).catch(function () {
-        if (status) { status.className = "form-status ko"; status.textContent = "Échec de l’envoi. Réessayez ou utilisez le lien email ci-dessous."; }
-      });
+      if (status) { status.className = "form-status"; status.textContent = "Ouverture de votre messagerie…"; }
+      var subject = encodeURIComponent("Demande de contact — " + (cfg.siteName || ""));
+      var body = encodeURIComponent(
+        "Nom : " + data.nom + "\nTéléphone : " + data.telephone + "\nEmail : " + data.email + "\n\n" + data.message
+      );
+      window.location.href = "mailto:" + (cfg.email || "") + "?subject=" + subject + "&body=" + body;
     });
   }
 
