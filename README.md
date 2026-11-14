@@ -37,7 +37,7 @@ build.sh                        Décode les .b64, télécharge les ressources, g
 .github/workflows/pages.yml     Déploiement automatique sur GitHub Pages
 ```
 
-> Le dépôt reste 100 % texte : photos et police (Instrument Sans, licence OFL) sont
+> Le dépôt reste 100 % texte : photos et police (Archivo, licence OFL) sont
 > téléchargées au build d'après `manifest.tsv`, empreinte SHA-256 vérifiée.
 > **Attention :** les photos sont encore tirées de l'ancien WordPress
 > (`perfitcenter.fr/wp-content/…`). Le jour où le domaine pointe vers ce site statique,
