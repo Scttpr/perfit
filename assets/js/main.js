@@ -30,14 +30,6 @@
     if (y) y.textContent = String(new Date().getFullYear());
   }
 
-  function markActiveNav() {
-    var path = window.location.pathname.replace(/\/index\.html$/, "/");
-    document.querySelectorAll(".main-nav a").forEach(function (a) {
-      var href = a.pathname.replace(/\/index\.html$/, "/");
-      if (href === path) a.classList.add("active");
-    });
-  }
-
   function initNav() {
     var toggle = document.getElementById("nav-toggle");
     var nav = document.getElementById("main-nav");
@@ -61,11 +53,42 @@
     });
   }
 
+  function initHeader() {
+    var header = document.querySelector(".site-header");
+    if (!header) return;
+    function onScroll() {
+      header.classList.toggle("scrolled", window.scrollY > 8);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  function initScrollspy() {
+    if (!("IntersectionObserver" in window)) return;
+    var links = document.querySelectorAll('.main-nav a[href^="#"]');
+    if (!links.length) return;
+    var byId = {};
+    links.forEach(function (a) { byId[a.getAttribute("href").slice(1)] = a; });
+    var sections = document.querySelectorAll("[data-spy]");
+    if (!sections.length) return;
+    function setActive(id) {
+      if (!byId[id] && /^(sport-sante|reathletisation|preparation-physique)$/.test(id)) id = "activites";
+      links.forEach(function (a) { a.classList.remove("active"); });
+      if (byId[id]) byId[id].classList.add("active");
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { rootMargin: "-40% 0px -55% 0px", threshold: 0 });
+    sections.forEach(function (s) { io.observe(s); });
+  }
+
   function initReveal() {
     if (!("IntersectionObserver" in window)) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     var els = document.querySelectorAll(
-      ".step, .activity, .work-class a, .team figure, .testimonial, .contact-card, .post-list li, .partners a, .gallery img, .video-poster"
+      ".split > div, .coach-card, .format-card, .partners a, .activity-card, .activity-block, .testimonial, .contact-infos, .contact-form, .video-poster"
     );
     els.forEach(function (el) { el.classList.add("reveal"); });
     var io = new IntersectionObserver(function (entries) {
@@ -120,8 +143,9 @@
   document.addEventListener("DOMContentLoaded", function () {
     fillCfg();
     setYear();
-    markActiveNav();
     initNav();
+    initHeader();
+    initScrollspy();
     initVideo();
     initForm();
     initReveal();
