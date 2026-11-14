@@ -1,0 +1,52 @@
+name: Déploiement GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Générer la config depuis les secrets (variables d'env)
+        env:
+          SITE_NAME: ${{ vars.SITE_NAME }}
+          SITE_URL: ${{ vars.SITE_URL }}
+          CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
+          CONTACT_ADDRESS: ${{ secrets.CONTACT_ADDRESS }}
+          CONTACT_PHONE_MAXIME: ${{ secrets.CONTACT_PHONE_MAXIME }}
+          CONTACT_PHONE_MAXIME_RAW: ${{ secrets.CONTACT_PHONE_MAXIME_RAW }}
+          CONTACT_PHONE_ROMAIN: ${{ secrets.CONTACT_PHONE_ROMAIN }}
+          CONTACT_PHONE_ROMAIN_RAW: ${{ secrets.CONTACT_PHONE_ROMAIN_RAW }}
+          CONTACT_SIRET: ${{ secrets.CONTACT_SIRET }}
+          FORM_ENDPOINT: ${{ secrets.FORM_ENDPOINT }}
+        run: ./build.sh
+
+      - name: Upload de l'artefact Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Déploiement sur GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
