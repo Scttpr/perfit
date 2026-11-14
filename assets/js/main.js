@@ -3,8 +3,6 @@
 
   var cfg = window.PERFIT_CONFIG || {};
 
-  // Fill placeholders from config.js (generated from env vars at build time).
-  // Elements whose value is missing/empty are removed, along with their "Label :" text.
   function fillCfg() {
     document.querySelectorAll("[data-cfg]").forEach(function (el) {
       var key = el.getAttribute("data-cfg");
@@ -40,14 +38,47 @@
     });
   }
 
-  function closeNavOnClick() {
+  function initNav() {
     var toggle = document.getElementById("nav-toggle");
-    document.querySelectorAll(".main-nav a").forEach(function (a) {
-      a.addEventListener("click", function () { if (toggle) toggle.checked = false; });
+    var nav = document.getElementById("main-nav");
+    if (!toggle || !nav) return;
+    function setOpen(open) {
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
+      nav.classList.toggle("open", open);
+    }
+    toggle.addEventListener("click", function () {
+      setOpen(toggle.getAttribute("aria-expanded") !== "true");
+    });
+    nav.addEventListener("click", function (e) {
+      if (e.target.closest("a")) setOpen(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") setOpen(false);
+    });
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 920) setOpen(false);
     });
   }
 
-  // Native <dialog> video player (YouTube iframe injected lazily on open)
+  function initReveal() {
+    if (!("IntersectionObserver" in window)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var els = document.querySelectorAll(
+      ".step, .activity, .work-class a, .team figure, .testimonial, .contact-card, .post-list li, .partners a, .gallery img, .video-poster"
+    );
+    els.forEach(function (el) { el.classList.add("reveal"); });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-in");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    els.forEach(function (el) { io.observe(el); });
+  }
+
   function initVideo() {
     var dialog = document.getElementById("video-dialog");
     if (!dialog) return;
@@ -64,7 +95,6 @@
     dialog.addEventListener("click", function (e) { if (e.target === dialog) close(); });
   }
 
-  // Contact form: no backend — opens a prefilled mail draft (mailto:)
   function initForm() {
     var form = document.getElementById("contact-form");
     if (!form) return;
@@ -91,8 +121,9 @@
     fillCfg();
     setYear();
     markActiveNav();
-    closeNavOnClick();
+    initNav();
     initVideo();
     initForm();
+    initReveal();
   });
 })();
