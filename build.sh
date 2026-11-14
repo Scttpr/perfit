@@ -35,24 +35,14 @@ fi
 : "${SITE_URL:=https://perfitcenter.fr}"
 : "${CONTACT_EMAIL:=}"
 : "${CONTACT_ADDRESS:=}"
-: "${CONTACT_PHONE_MAXIME:=}"
-: "${CONTACT_PHONE_MAXIME_RAW:=}"
-: "${CONTACT_PHONE_ROMAIN:=}"
-: "${CONTACT_PHONE_ROMAIN_RAW:=}"
-: "${CONTACT_SIRET:=}"
-: "${FORM_ENDPOINT:=}"
 
 echo "== 3/3 Génération de assets/js/config.js =="
-python3 - "$SITE_NAME" "$SITE_URL" "$CONTACT_EMAIL" "$CONTACT_ADDRESS" \
-  "$CONTACT_PHONE_MAXIME" "$CONTACT_PHONE_MAXIME_RAW" \
-  "$CONTACT_PHONE_ROMAIN" "$CONTACT_PHONE_ROMAIN_RAW" \
-  "$CONTACT_SIRET" "$FORM_ENDPOINT" <<'PYEOF'
+python3 - "$SITE_NAME" "$SITE_URL" "$CONTACT_EMAIL" "$CONTACT_ADDRESS" <<'PYEOF'
 import json, sys, os
 
-(site_name, site_url, email, address, tel_m, tel_m_raw, tel_r, tel_r_raw, siret, form_endpoint) = sys.argv[1:11]
+(site_name, site_url, email, address) = sys.argv[1:5]
 
 address_inline = " - ".join(part.strip() for part in address.splitlines() if part.strip())
-phones_inline = " / ".join(p for p in (tel_m, tel_r) if p)
 
 cfg = {
     "siteName": site_name,
@@ -60,13 +50,6 @@ cfg = {
     "email": email,
     "address": address,
     "addressInline": address_inline,
-    "phonesInline": phones_inline,
-    "phoneMaxime": tel_m,
-    "phoneMaximeRaw": tel_m_raw,
-    "phoneRomain": tel_r,
-    "phoneRomainRaw": tel_r_raw,
-    "siret": siret,
-    "formEndpoint": form_endpoint,
 }
 
 os.makedirs("assets/js", exist_ok=True)
