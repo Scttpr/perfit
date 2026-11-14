@@ -2,7 +2,7 @@
 
 Version statique, sans dépendance runtime, du site WordPress **perfitcenter.fr**
 (Perf IT — préparation physique à Péronnas) : HTML + CSS + un petit JavaScript vanilla,
-sans framework, sans CMS, sans base de données.
+sans framework, sans CMS, sans base de données. Le site est pensé comme un **one-pager** (ancres) afin de rester simple et rapide.
 
 > Note : le dépôt reste 100 % texte. Les favicons sont embarqués en `assets/img/*.b64`
 > (décodés au build) ; toutes les autres images (photos, logo footer, pin, logos
@@ -13,18 +13,18 @@ sans framework, sans CMS, sans base de données.
 
 ## Structure
 
+Architecture **one-pager** : une seule page d'accueil avec sections ancrées,
+plus les pages légales obligatoires.
+
 ```
-index.html                  Accueil (diaporama CSS pur, étapes, séances)
-le-concept/                 Le concept, l'équipe, les partenaires
-sport-sante/                Sport Santé + témoignages
-reathletisation/            Réathlétisation + témoignages
-preparation-physique/       Préparation physique + témoignages
-contact/                    Coordonnées + formulaire de contact
-politique-de-confidentialite/   Politique de confidentialité (contenu d'origine)
+index.html                  One-pager : hero, concept, 3 activités (ancres), contact
 mentions-legales/           Mentions légales
-blog/                       Blog (article d'origine)
+politique-de-confidentialite/   Politique de confidentialité (contenu d'origine)
+404.html                    Page d'erreur
+le-concept/ sport-sante/ reathletisation/ preparation-physique/ contact/ blog/
+                            Redirections (meta refresh) vers les ancres de l'accueil
 assets/css/style.css        Feuille de style unique
-assets/js/main.js           Config dynamique, menu mobile, lecteur vidéo, formulaire
+assets/js/main.js           Config dynamique, menu mobile, scrollspy, lecteur vidéo, formulaire
 assets/img/*.b64 + logo.svg Favicons embarqués (base64) + logo, décodés/copiés au build
 assets/img/manifest.tsv     Images du site d'origine (URL + SHA-256) pour le build
 tools/fetch_images.py       Téléchargement vérifié + redimensionnement des images
