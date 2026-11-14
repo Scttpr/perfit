@@ -5,12 +5,5 @@ window.PERFIT_CONFIG = {
   siteUrl: "https://perfitcenter.fr",
   email: "",
   address: "",
-  addressInline: "",
-  phonesInline: "",
-  phoneMaxime: "",
-  phoneMaximeRaw: "",
-  phoneRomain: "",
-  phoneRomainRaw: "",
-  siret: "",
-  formEndpoint: ""
+  addressInline: ""
 };
