@@ -34,12 +34,9 @@
 
   function markActiveNav() {
     var path = window.location.pathname.replace(/\/index\.html$/, "/");
-    if (path === "/") path = "/";
     document.querySelectorAll(".main-nav a").forEach(function (a) {
-      var href = a.getAttribute("href");
-      if (href === path || (path !== "/" && path.indexOf(href) === 0 && href !== "/")) {
-        a.classList.add("active");
-      }
+      var href = a.pathname.replace(/\/index\.html$/, "/");
+      if (href === path) a.classList.add("active");
     });
   }
 
