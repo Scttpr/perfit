@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d181d">
 <title>Accueil | Perf IT — Préparation physique à Péronnas</title>
 <meta name="description" content="Perf IT — sport adapté à vos objectifs à Péronnas : sport santé, réathlétisation, préparation physique. Séances collectives et individuelles.">
 <link rel="canonical" href="https://perfitcenter.fr/">
@@ -19,12 +22,12 @@
 <script src="./assets/js/main.js" defer></script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="./"><img class="logo" src="./assets/img/logo.svg" alt="Perf IT — retour à l'accueil"></a>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle">
-    <label for="nav-toggle" class="nav-burger" aria-label="Ouvrir / fermer le menu"><span></span><span></span><span></span></label>
-    <nav class="main-nav" aria-label="Navigation principale">
+    <button type="button" id="nav-toggle" class="nav-burger" aria-expanded="false" aria-controls="main-nav" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
+    <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
       <ul>
         <li><a href="./">Accueil</a></li>
         <li><a href="./le-concept/">Le concept</a></li>
@@ -46,18 +49,18 @@
 
 <section class="hero" aria-label="Bannière principale">
   <div class="slide" style="background-image:url('./assets/img/slide-1.jpg')">
-    <div class="hero-message"><h1>Le sport<br>adapté<br>à vos objectifs</h1><p class="place">à Péronnas</p></div>
+    <div class="hero-message"><h1>Le sport<br>adapté<br>à vos objectifs</h1><p class="place">à Péronnas</p><p class="hero-cta"><a class="btn" href="./contact/">Nous contacter</a></p></div>
   </div>
-  <div class="slide" style="background-image:url('./assets/img/slide-2.jpg')">
-    <div class="hero-message"><h1>Le sport<br>adapté<br>à vos objectifs</h1><p class="place">à Péronnas</p></div>
+  <div class="slide" aria-hidden="true" style="background-image:url('./assets/img/slide-2.jpg')">
+    <div class="hero-message"><h1>Le sport<br>adapté<br>à vos objectifs</h1><p class="place">à Péronnas</p><p class="hero-cta"><a class="btn" href="./contact/">Nous contacter</a></p></div>
   </div>
-  <div class="slide" style="background-image:url('./assets/img/slide-3.jpg')">
-    <div class="hero-message"><h1>Le sport<br>adapté<br>à vos objectifs</h1><p class="place">à Péronnas</p></div>
+  <div class="slide" aria-hidden="true" style="background-image:url('./assets/img/slide-3.jpg')">
+    <div class="hero-message"><h1>Le sport<br>adapté<br>à vos objectifs</h1><p class="place">à Péronnas</p><p class="hero-cta"><a class="btn" href="./contact/">Nous contacter</a></p></div>
   </div>
   <a class="hero-scroll" href="#main-content" aria-label="Défiler vers le contenu">⌄</a>
 </section>
 
-<div class="container" id="main-content">
+<div class="container" id="main-content" tabindex="-1">
   <section class="step">
     <div class="step-media">
       <button class="video-poster" data-video="https://www.youtube.com/embed/05JRMwKV2Ks?rel=0" aria-label="Lire la vidéo de présentation">
