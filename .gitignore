@@ -6,5 +6,8 @@ assets/img/*.jpg
 assets/img/*.jpeg
 assets/img/*.png
 assets/img/*.gif
+assets/img/*.webp
+# police téléchargée au build (épinglée dans manifest.tsv)
+assets/fonts/
 .DS_Store
 *.log

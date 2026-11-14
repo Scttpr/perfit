@@ -1,21 +1,11 @@
-# dest	url	sha256(original plein taille)	max_width
-banner-concept.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/04-compressor-1-1.jpg	212695e3bf823363a8e88f096a34cd84694721c3c3ac22a945525bc9b367c7c9	1600
-banner-contact.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/02-compressor-1.jpg	e55875726bda13111340ef9fc185efa8b12582560a1c793eda7c10dc201e6690	1600
-banner-prep-physique.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/05-compressor.jpg	0f483ba2ec36a9b676c3baef5a68ab023526ea7721d449eeef9d9b877dbddfa7	1600
-banner-reathletisation.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/03-compressor-1.jpg	2abc430ba6a2ca6d5b4ede1a9090117cb329ec8e8052cf1eee11d51bbac35839	1600
-banner-sport-sante.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/01-compressor-2.jpg	e080b4b5eeff96509d768bb5bb13c560f9cdc908702dc34d7cfe9e75d2152915	1600
-bg-testimonials.jpg	https://perfitcenter.fr/wp-content/uploads/2018/02/bg-testimonials.jpg	683631dcb3badc4cdf31eaff1c20b2346977495c31bb2969ed621f9aa23e5e15	1600
+# dest	url	sha256(original)	max_width (ou « raw » : fichier copié tel quel, dest relative à assets/)
 bg-video-concept.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/bg-video-concept.jpg	c1fbecf31447634f80ddc498bc7968b0be074674aad2d6a15780a08517074e92	1200
 bg-video-reath.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/bg-video-reath.jpg	36acff2cf884c852c176925be98d220ef7deea774d1a36ae0c7c0537b340dc29	1200
 bg-video-ss.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/bg-video-ss-2.jpg	c571675ed64dc66847bc13ba94f785bb69d2cc503790be568e580863884344e5	1200
 circuit-cardio.jpeg	https://perfitcenter.fr/wp-content/uploads/2019/02/Circuit-cardio-sous-les-encouragements-de-Romain.jpeg	07b1c5fd4d365208934e2ee9e5a7fd197ffdf4cfcf4bb6ca56fb09b7f6dc084c	400
 cours-prep-physique.jpg	https://perfitcenter.fr/wp-content/uploads/2018/03/prep-physique.jpg	0017e775d6f219ffa1e18c68adce314b0c5417e7a98989e343cd7ae8ee6ed692	900
 cours-reathletisation.jpg	https://perfitcenter.fr/wp-content/uploads/2018/03/reathl%C3%A9tisation.jpg	11d8930eedf9c72daf856aee28831a3bc3e019d5e26bfbee87237e8d971e3b08	900
-cours-sport-sante.jpg	https://perfitcenter.fr/wp-content/uploads/2018/02/03.jpg	5815f8971dff54a4690aa9e135aa152333690dde6918a6a435732bf58001aad5	900
-le-concept.jpg	https://perfitcenter.fr/wp-content/uploads/2018/03/le-concept.jpg	15d9f4fd93daece2815b3197003df5172ace8cacf3dcd0cf3d039d43c1003b46	1200
-logo-footer.png	https://perfitcenter.fr/wp-content/uploads/2018/04/logo.png	2751e6cebb7c3b6cdbe92358f4385cbf370948d167a88df2848288697b025d34	200
 maxime-web.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/maxime-web.jpg	fd5fb20d9eb9f777a36b09db3c19a729bed9c8252c4fd1b92ff92736186796c8	800
-maxime.png	https://perfitcenter.fr/wp-content/uploads/2018/02/maxime.png	4d38467a489a808ff3f13d6ec988568876d69c25b38f1fb44c796aba38c64bc5	300
 mg3723.jpeg	https://perfitcenter.fr/wp-content/uploads/2019/02/MG_3723-e1550843580332.jpeg	b1c3cc58ee18ecac228c6bc36dd6ca9b8b18e8234f0b0e32a7de7989b654e5f1	400
 objectifs.jpg	https://perfitcenter.fr/wp-content/uploads/2018/03/Sans-titre-1.jpg	d87dfb51267fc73dc66cabed0a8c7f9fd6b8b6e3669717447d19df9288a55a24	1200
 partner-biocoop.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/logo-biocoop.jpg	03c8c825247c8a3e8c88c6dc1e856faa95dabb431545428d0ebf3483712014d3	200
@@ -24,17 +14,10 @@ partner-mc.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/logo-mc.jpg	ac
 partner-mv.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/logo-mv.jpg	9d7aae95afc52aaabe1d249588643bef50724015e357dbe630d3cad7278c4284	200
 partner-runalp.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/logo-run-alp.jpg	0c246f0f9d50fd1efbd1bb72575260ec4724bac38bfeb4c435da17152e548e8c	200
 partner-sb.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/logo-sb.jpg	e7dad9306f626845f08753e0e9fd402800d8c66b3e146d6174f6370d91767398	200
-pin.png	https://perfitcenter.fr/wp-content/uploads/2018/02/pin-perfit-2.png	2e416444ba6b464b097db14058d65483f8dd857decebef44db552c9c960507fc	82
 pp-1.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/perfit-sport-sante-compressor-1.jpg	b5bff0d96fefed6c5afeab1d4a0df3137a2dcf8cfd4f86a31a51cae3f9ef97a0	1000
 pp-2.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/perfit-sport-sante-compressor-2.jpg	4515168887df1e4d16dd23cd0984fe18b81e811c3fdd7351a94fe37e0dc4da96	1000
 reath.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/perfit-reathle-compressor-compressor.jpg	7689e48109e8bef5c0610575a8df9cb99ccde766843f60cd24a093ecb3cbd57c	1000
 romain-web.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/romain-web.jpg	5338c88b3fe5829c94c14f55d791f847249c9e228f1dff16f19ae1cfb623749e	800
-romain.jpg	https://perfitcenter.fr/wp-content/uploads/2018/02/romain.jpg	cf92e235cff8d084ed89af4f5ef1f2d9765ca80c1a86ec1c365a84a21a7bf2bb	300
-seance-collective.jpg	https://perfitcenter.fr/wp-content/themes/idcomcrea/img/seance-collective.jpg	9954534fba39be7365c72b8d39cefaf2851d1df46ed81e3f4380f5949c64d963	900
-seance-individuelle.jpg	https://perfitcenter.fr/wp-content/themes/idcomcrea/img/seance-individuelle.jpg	ac35bbeec6add01dbd91cb394e6f33c29641bf1a822c44abc1cee2c283a9101d	900
-slide-1.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/slide-01-compressor-2.jpg	89496923c1e5e15eb25528950ef55c94123a162ae524bd8db40cdb1fff5ba5ae	1920
-slide-2.jpg	https://perfitcenter.fr/wp-content/uploads/2018/03/slide-02.jpg	1be6504c400e85ad2426a48b395ed6de7a09433f6262b6c5080873c1d8a755ac	1920
-slide-3.jpg	https://perfitcenter.fr/wp-content/uploads/2018/03/slide-03.jpg	5468ad257139d3849e3953f0096092a8e4ce53d08ddbb89e84ad58eae0274bc9	1920
 ss-1.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/sport-sante-1-compressor.jpg	2889b3fba00e7b8de36b76f9be63377544d96662e29283b8251d80f0cefccadf	900
 ss-2.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/sport-sante-2-compressor.jpg	e33ea32a7564382f773c436d2b018ea97cfde863278286a96f200543bc4df62e	900
 ss-3.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/sport-sante-3-compressor.jpg	d3747feec748474c5a989e0fb0b5358b3837a2e27afd265cbec1e9043ae614bb	900
@@ -47,3 +30,4 @@ t-hugo.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/hugo-e152291517257
 t-julien.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/V__2E20.jpg	e488dcaa45a5a92e11c2586d30541a8dce832e62e9d5746c5dfccd2f843ff338	400
 t-robert.jpg	https://perfitcenter.fr/wp-content/uploads/2018/04/robert-e1522914958489.jpg	0df47b24c6894aedda2118ed6c61e92b0164eb2cba7039e5e464b66b866429a7	400
 t-sandy.jpg	https://perfitcenter.fr/wp-content/uploads/2019/02/Sandy.jpg	0c93331177091d5b1239d794ab815084bd6294ee9d97d94f50b4cce580b26d8b	400
+fonts/instrument-sans-latin-wght-normal.woff2	https://cdn.jsdelivr.net/npm/@fontsource-variable/instrument-sans@5.2.8/files/instrument-sans-latin-wght-normal.woff2	2ee17598a98d8a59e4df8152d015bec9ab8e4d5672cc0ab42bef806b568e3971	raw

@@ -29,6 +29,10 @@ jobs:
           SITE_URL: ${{ vars.SITE_URL }}
           CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
           CONTACT_ADDRESS: ${{ secrets.CONTACT_ADDRESS }}
+          CONTACT_PHONE: ${{ secrets.CONTACT_PHONE }}
+          LEGAL_NAME: ${{ vars.LEGAL_NAME }}
+          SIRET: ${{ vars.SIRET }}
+          PUBLICATION_DIRECTOR: ${{ secrets.PUBLICATION_DIRECTOR }}
         run: bash ./build.sh
 
       - name: Upload de l'artefact Pages

@@ -1,89 +1,89 @@
-# Perf IT — site statique (clone de perfitcenter.fr)
+# Perf IT — site statique
 
-Version statique, sans dépendance runtime, du site WordPress **perfitcenter.fr**
-(Perf IT — préparation physique à Péronnas) : HTML + CSS + un petit JavaScript vanilla,
-sans framework, sans CMS, sans base de données. Le site est pensé comme un **one-pager** (ancres) afin de rester simple et rapide.
+Site de **Perf IT**, studio de préparation physique à Péronnas (perfitcenter.fr) :
+HTML + CSS + un petit JavaScript vanilla, sans framework, sans CMS, sans base de données.
+Une page d'accueil à ancres (one-pager) et deux pages légales.
 
-> Note : le dépôt reste 100 % texte. Les favicons sont embarqués en `assets/img/*.b64`
-> (décodés au build) ; toutes les autres images (photos, logo footer, pin, logos
-> partenaires) sont téléchargées au build depuis le site d'origine via
-> `assets/img/manifest.tsv` (URL + empreinte **SHA-256 épinglée**, vérifiée avant usage)
-> puis redimensionnées par `tools/fetch_images.py`. Pour un dépôt totalement autonome,
-> on peut plus tard remplacer le manifest par des images commitées directement.
+## Principes
+
+- **Aucun cookie, aucun traceur, aucune ressource tierce au chargement** : police, images
+  et scripts sont servis par le site. Pas de bandeau de consentement nécessaire.
+- **Vidéos YouTube chargées au clic uniquement**, via `youtube-nocookie.com`.
+- **Formulaire sans backend** : il prépare un e-mail (`mailto:`) dans la messagerie du
+  visiteur ; rien n'est transmis par le site.
+- **CSP stricte** (balise `<meta>`) : pas de script ni de style en ligne. Toute mise en
+  forme passe par `assets/css/style.css` — ne pas ajouter d'attribut `style="…"`.
+- Clair/sombre automatique, navigation clavier, `prefers-reduced-motion` respecté.
+
+La politique de confidentialité décrit exactement ce fonctionnement : si vous ajoutez un
+outil de statistiques, un formulaire avec envoi serveur ou un contenu tiers, mettez-la à
+jour (ainsi que la CSP).
 
 ## Structure
 
-Architecture **one-pager** : une seule page d'accueil avec sections ancrées,
-plus les pages légales obligatoires.
-
 ```
-index.html                  One-pager : hero, concept, 3 activités (ancres), contact
-mentions-legales/           Mentions légales
-politique-de-confidentialite/   Politique de confidentialité (contenu d'origine)
-404.html                    Page d'erreur
+index.html                      One-pager : approche, activités, formules, équipe, contact
+mentions-legales/               Mentions légales
+politique-de-confidentialite/   Politique de confidentialité
+404.html                        Page d'erreur (chemins absolus : suppose un domaine servi à la racine)
 le-concept/ sport-sante/ reathletisation/ preparation-physique/ contact/ blog/
-                            Redirections (meta refresh) vers les ancres de l'accueil
-assets/css/style.css        Feuille de style unique
-assets/js/main.js           Config dynamique, menu mobile, scrollspy, lecteur vidéo, formulaire
-assets/img/*.b64 + logo.svg Favicons embarqués (base64) + logo, décodés/copiés au build
-assets/img/manifest.tsv     Images du site d'origine (URL + SHA-256) pour le build
-tools/fetch_images.py       Téléchargement vérifié + redimensionnement des images
-build.sh                    Décode les .b64, fetch les images, génère config.js depuis env
-.github/workflows/pages.yml Déploiement automatique sur GitHub Pages
+                                Redirections (meta refresh) des anciennes URL vers l'accueil
+assets/css/style.css            Feuille de style unique
+assets/js/main.js               Coordonnées (config), menu mobile, vidéos au clic, formulaire
+assets/img/*.b64 + logo.svg     Favicons embarqués (base64) + logo
+assets/img/manifest.tsv         Ressources téléchargées au build (URL + SHA-256 épinglé)
+tools/fetch_images.py           Téléchargement vérifié, redimensionnement, JPEG + WebP
+build.sh                        Décode les .b64, télécharge les ressources, génère config.js
+.github/workflows/pages.yml     Déploiement automatique sur GitHub Pages
 ```
 
-## Données personnelles = variables d'environnement
+> Le dépôt reste 100 % texte : photos et police (Instrument Sans, licence OFL) sont
+> téléchargées au build d'après `manifest.tsv`, empreinte SHA-256 vérifiée.
+> **Attention :** les photos sont encore tirées de l'ancien WordPress
+> (`perfitcenter.fr/wp-content/…`). Le jour où le domaine pointe vers ce site statique,
+> ces URL disparaissent et le build échoue : il faudra d'abord committer les images ou
+> les héberger ailleurs, puis adapter le manifest.
 
-Aucune donnée personnelle (email, adresse) n'est écrite dans le code. Au build,
-`build.sh` génère `assets/js/config.js` (gitignoré) à partir de variables
-d'environnement ; `main.js` remplit les balises `data-cfg="…"` du HTML et retire
-les éléments dont la valeur est vide :
+## Coordonnées et mentions = variables d'environnement
 
-| Variable | Rôle | Secret ou variable ? |
+Aucune coordonnée n'est écrite dans le code. `build.sh` génère `assets/js/config.js`
+(gitignoré) ; `main.js` remplit les balises `data-cfg="…"` et retire les éléments
+`data-cfg-if="…"` dont la valeur est vide.
+
+| Variable | Rôle | Où la définir (GitHub) |
 |---|---|---|
-| `SITE_NAME` | Nom du site (défaut : Perf IT) | Variable (onglet *Variables*) |
-| `SITE_URL` | URL canonique | Variable (onglet *Variables*) |
-| `CONTACT_EMAIL` | Email de contact (footer, page contact, mentions légales) | **Secret** |
-| `CONTACT_ADDRESS` | Adresse postale multiligne (footer, contact, mentions légales) | **Secret** |
+| `SITE_NAME` | Nom du site (défaut : Perf IT) | Variable |
+| `SITE_URL` | URL canonique | Variable |
+| `CONTACT_EMAIL` | E-mail de contact | **Secret** |
+| `CONTACT_ADDRESS` | Adresse postale multiligne | **Secret** |
+| `CONTACT_PHONE` | Téléphone (facultatif) | **Secret** |
+| `LEGAL_NAME` | Raison sociale et forme juridique | Variable |
+| `SIRET` | Numéro SIRET | Variable |
+| `PUBLICATION_DIRECTOR` | Directeur de la publication | **Secret** |
 
-En local : copiez `.env.example` en `.env`, renseignez, puis `./build.sh`.
+`LEGAL_NAME`, `SIRET`, `CONTACT_ADDRESS` et `PUBLICATION_DIRECTOR` alimentent les mentions
+légales obligatoires (LCEN, art. 6) : le build affiche un avertissement s'il en manque.
 
 ## Tester en local
 
 ```bash
 cp .env.example .env   # puis éditez .env (valeurs entre guillemets si espaces)
-./build.sh             # décode .b64 + télécharge les images (SHA-256) + génère config.js
+./build.sh             # nécessite python3 + Pillow
 python3 -m http.server 8000
 # ouvrir http://localhost:8000
 ```
 
-## Déploiement sur GitHub Pages (automatique)
+## Déploiement sur GitHub Pages
 
-1. **Secrets** (Settings → Secrets and variables → Actions → *New repository secret*) :
-   `CONTACT_EMAIL` et `CONTACT_ADDRESS` (valeurs : celles affichées actuellement sur
-   perfitcenter.fr — footer / page contact).
-   **Variables** (onglet *Variables*) : `SITE_NAME`, `SITE_URL`.
-2. **Pages** : Settings → Pages → Build and deployment → Source : **GitHub Actions**.
-3. Poussez sur `main` : le workflow `.github/workflows/pages.yml` décode les `.b64`,
-   télécharge les images épinglées, génère `config.js` depuis les secrets, puis publie le site.
-4. **Domaine perso** : Settings → Pages → Custom domain → `perfitcenter.fr`
-   (+ enregistrements CNAME/ALIAS chez votre registrar).
+1. Settings → Secrets and variables → Actions : créez les secrets et variables ci-dessus.
+2. Settings → Pages → Build and deployment → Source : **GitHub Actions**.
+3. Poussez sur `main` : le workflow exécute `build.sh` puis publie le site.
+4. Domaine : Settings → Pages → Custom domain → `perfitcenter.fr`.
 
-### Alternative : Cloudflare Pages
-
-Importez ce dépôt dans Cloudflare Pages (build command : `bash build.sh`, output : `/`)
-et définissez les mêmes variables d'environnement dans les *Environment variables*
-du projet (chiffrées côté Cloudflare).
-
-## Formulaire de contact
-
-Sans backend : à la soumission, le formulaire ouvre un brouillon `mailto:` pré-rempli
-avec l'email de contact (`CONTACT_EMAIL`).
+Si l'hébergeur change, mettez à jour la rubrique « Hébergeur » des mentions légales et le
+point 1 de la politique de confidentialité.
 
 ## Licence
 
 Code source sous licence [MIT](LICENSE). Les contenus éditoriaux et photos restent
 la propriété de Perf IT.
-
----
-*Généré à partir de l'export WordPress REST API (wp-json) du site d'origine.*
