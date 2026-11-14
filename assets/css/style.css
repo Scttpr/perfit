@@ -288,7 +288,7 @@ p:last-child { margin-bottom: 0; }
 .dialog-close { position: absolute; top: -52px; right: 0; width: 44px; height: 44px; border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 50%; background: transparent; color: #fff; font-size: 24px; line-height: 1; cursor: pointer; }
 .dialog-close:hover { background: rgba(255, 255, 255, 0.16); }
 
-/* ---------- Activités ---------- */
+/* ---------- Accompagnements ---------- */
 
 .jump { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
 .jump a { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); font-size: 0.95rem; font-weight: 500; text-decoration: none; }
@@ -303,12 +303,18 @@ p:last-child { margin-bottom: 0; }
 .pair img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-lg); }
 
 .quotes-title { margin: clamp(36px, 5vw, 56px) 0 20px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
-.quotes { columns: 3 300px; column-gap: clamp(20px, 3vw, 36px); }
-.quote { break-inside: avoid; margin: 0 0 clamp(20px, 3vw, 36px); padding: 22px 0 0; border-top: 1px solid var(--line); }
-.quote blockquote { margin: 0; font-size: 0.98rem; line-height: 1.6; }
+.quotes { columns: 3 300px; column-gap: 20px; }
+.quotes.two { columns: 2 300px; }
+.quote { break-inside: avoid; margin: 0 0 20px; padding: clamp(22px, 3vw, 30px); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); }
+.quote::before { content: "\201C"; display: block; height: 30px; font-size: 3.6rem; font-weight: 700; line-height: 1; color: var(--accent); }
+.quote blockquote { margin: 0; font-size: 1rem; line-height: 1.62; color: var(--muted); }
 .quote blockquote p { margin-bottom: 0.7em; }
-.quote figcaption { display: flex; align-items: center; gap: 12px; margin-top: 16px; font-weight: 600; font-size: 0.95rem; }
-.quote figcaption img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex: none; }
+.quote.short blockquote { font-size: clamp(1.2rem, 1.8vw, 1.4rem); font-weight: 600; line-height: 1.35; letter-spacing: -0.015em; color: var(--ink); }
+.quote mark { background: linear-gradient(transparent 58%, var(--accent-soft) 58%); color: var(--ink); font-weight: 600; }
+.quote figcaption { display: flex; align-items: center; gap: 14px; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
+.quote figcaption img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex: none; }
+.quote .who { display: block; font-weight: 600; line-height: 1.3; }
+.quote small { display: block; font-size: 0.85rem; color: var(--muted); }
 
 /* ---------- Formules ---------- */
 
@@ -359,29 +365,8 @@ p:last-child { margin-bottom: 0; }
 .socials svg.stroke { fill: none; stroke: currentColor; stroke-width: 2; }
 .socials svg.stroke .dot { fill: currentColor; stroke: none; }
 
-.contact-form { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(24px, 4vw, 40px); }
-.contact-form h3 { font-size: 1.4rem; margin-bottom: 8px; }
-.contact-form .hint { color: var(--muted); font-size: 0.95rem; margin-bottom: 24px; }
-.field { margin-bottom: 18px; }
-.field label { display: block; margin-bottom: 6px; font-size: 0.95rem; font-weight: 600; }
-.field .optional { font-weight: 400; color: var(--muted); }
-.field input, .field textarea {
-  width: 100%;
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--bg);
-  color: var(--ink);
-  font: inherit;
-  font-size: 1rem;
-}
-.field input { min-height: 48px; }
-.field textarea { min-height: 150px; resize: vertical; }
-.field input:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
-.form-status { margin: 14px 0 0; font-size: 0.95rem; font-weight: 600; }
-.form-status.ok { color: var(--ok); }
-.form-status.ko { color: var(--ko); }
-.form-legal { margin-top: 18px; font-size: 0.85rem; color: var(--muted); }
+.contact-cta { margin-top: 28px; }
+.contact-grid .small { color: var(--muted); }
 
 /* ---------- Pages intérieures (légales, 404) ---------- */
 
@@ -474,7 +459,7 @@ p:last-child { margin-bottom: 0; }
 }
 
 @media print {
-  .site-header, .site-footer, .video, .contact-form, .skip-link { display: none; }
+  .site-header, .site-footer, .video, .skip-link { display: none; }
   body { background: #fff; color: #000; }
   .section { padding: 24px 0; }
 }

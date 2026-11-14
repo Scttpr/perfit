@@ -2,8 +2,7 @@
   "use strict";
 
   // Aucun cookie, aucun stockage local, aucune requête tierce au chargement :
-  // ce script se limite à l'affichage des coordonnées, au menu, aux vidéos (au clic)
-  // et à la préparation d'un e-mail dans la messagerie du visiteur.
+  // ce script se limite à l'affichage des coordonnées, au menu et aux vidéos (au clic).
 
   document.documentElement.classList.add("js");
 
@@ -131,33 +130,6 @@
     });
   }
 
-  function initForm() {
-    var form = document.getElementById("contact-form");
-    if (!form) return;
-    var status = document.getElementById("form-status");
-    function say(text, kind) {
-      if (!status) return;
-      status.className = "form-status" + (kind ? " " + kind : "");
-      status.textContent = text;
-    }
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (!has("email")) {
-        say("L’adresse de contact n’est pas disponible pour le moment.", "ko");
-        return;
-      }
-      var lines = ["Nom : " + form.nom.value.trim()];
-      var tel = form.telephone.value.trim();
-      if (tel) lines.push("Téléphone : " + tel);
-      lines.push("", form.message.value.trim());
-      var subject = "Prise de contact — " + (cfg.siteName || "Perf IT");
-      window.location.href = "mailto:" + cfg.email +
-        "?subject=" + encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(lines.join("\n"));
-      say("Votre messagerie s’ouvre avec le message prérempli : il ne vous reste qu’à l’envoyer. Si rien ne se passe, écrivez-nous directement à " + cfg.email + ".", "ok");
-    });
-  }
-
   document.addEventListener("DOMContentLoaded", function () {
     fillCfg();
     setYear();
@@ -166,6 +138,5 @@
     initScrollspy();
     initVideo();
     initCopy();
-    initForm();
   });
 })();

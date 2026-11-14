@@ -1,6 +1,6 @@
 # Perf IT — site statique
 
-Site de **Perf IT**, studio de préparation physique à Péronnas (perfitcenter.fr) :
+Site de **Perf IT**, centre de préparation physique à Péronnas (perfitcenter.fr) :
 HTML + CSS + un petit JavaScript vanilla, sans framework, sans CMS, sans base de données.
 Une page d'accueil à ancres (one-pager) et deux pages légales.
 
@@ -9,8 +9,8 @@ Une page d'accueil à ancres (one-pager) et deux pages légales.
 - **Aucun cookie, aucun traceur, aucune ressource tierce au chargement** : police, images
   et scripts sont servis par le site. Pas de bandeau de consentement nécessaire.
 - **Vidéos YouTube chargées au clic uniquement**, via `youtube-nocookie.com`.
-- **Formulaire sans backend** : il prépare un e-mail (`mailto:`) dans la messagerie du
-  visiteur ; rien n'est transmis par le site.
+- **Pas de formulaire** : le contact passe par un lien `mailto:` (et `tel:` si un téléphone
+  est configuré) ; rien ne transite par le site.
 - **CSP stricte** (balise `<meta>`) : pas de script ni de style en ligne. Toute mise en
   forme passe par `assets/css/style.css` — ne pas ajouter d'attribut `style="…"`.
 - Clair/sombre automatique, navigation clavier, `prefers-reduced-motion` respecté.
@@ -22,14 +22,14 @@ jour (ainsi que la CSP).
 ## Structure
 
 ```
-index.html                      One-pager : approche, activités, formules, équipe, contact
+index.html                      One-pager : approche, accompagnements, formules, équipe, contact
 mentions-legales/               Mentions légales
 politique-de-confidentialite/   Politique de confidentialité
 404.html                        Page d'erreur (chemins absolus : suppose un domaine servi à la racine)
 le-concept/ sport-sante/ reathletisation/ preparation-physique/ contact/ blog/
                                 Redirections (meta refresh) des anciennes URL vers l'accueil
 assets/css/style.css            Feuille de style unique
-assets/js/main.js               Coordonnées (config), menu mobile, vidéos au clic, formulaire
+assets/js/main.js               Coordonnées (config), menu mobile, vidéos au clic
 assets/img/*.b64 + logo.svg     Favicons embarqués (base64) + logo
 assets/img/manifest.tsv         Ressources téléchargées au build (URL + SHA-256 épinglé)
 tools/fetch_images.py           Téléchargement vérifié, redimensionnement, JPEG + WebP
